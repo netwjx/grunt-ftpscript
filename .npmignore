@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.git*
+**/*.coffee
+Gruntfile.coffee
+test/
+.ftppass
+.travis.yml
