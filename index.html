@@ -1,72 +1,280 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Grunt-ftpscript by netwjx</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>Grunt-ftpscript by netwjx</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Grunt-ftpscript</h1>
-        <p class="header">Upload files to FTP Server, Active or Passive mode, bash ftp command.</p>
+    <header>
+      <div class="inner">
+        <h1>Grunt-ftpscript</h1>
+        <h2>Upload files to FTP Server, Active or Passive mode, bash ftp command.</h2>
+        <a href="https://github.com/netwjx/grunt-ftpscript" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/netwjx/grunt-ftpscript/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/netwjx/grunt-ftpscript/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/netwjx/grunt-ftpscript">View On GitHub</a></li>
-        </ul>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><a href="https://travis-ci.org/netwjx/grunt-ftpscript"><img src="https://travis-ci.org/netwjx/grunt-ftpscript.png" alt="Build Status"></a></p>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/netwjx">netwjx</a></p>
+<h1>
+<a name="grunt-ftpscript" class="anchor" href="#grunt-ftpscript"><span class="octicon octicon-link"></span></a>grunt-ftpscript</h1>
 
+<blockquote>
+<p>Upload files to FTP Server, Active or Passive mode, bash ftp command.</p>
+</blockquote>
 
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>This plugin requires Grunt <code>~0.4.1</code></p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>If you haven't used <a href="http://gruntjs.com/">Grunt</a> before, be sure to check out the <a href="http://gruntjs.com/getting-started">Getting Started</a> guide, as it explains how to create a <a href="http://gruntjs.com/sample-gruntfile">Gruntfile</a> as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:</p>
+
+<pre lang="shell"><code>npm install grunt-ftpscript --save-dev
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
+
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-ftpscript'</span><span class="p">);</span>
+</pre></div>
+
+<p>Use <a href="https://github.com/tkellen/node-matchdep">matchdep</a> load npm tasks is good idea.</p>
+
+<div class="highlight"><pre><span class="nx">require</span><span class="p">(</span><span class="s1">'matchdep'</span><span class="p">).</span><span class="nx">filterDev</span><span class="p">(</span><span class="s1">'grunt-*'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="the-ftpscript-task" class="anchor" href="#the-ftpscript-task"><span class="octicon octicon-link"></span></a>The "ftpscript" task</h2>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>In your project's Gruntfile, add a section named <code>ftpscript</code> to the data object passed into <code>grunt.initConfig()</code>.</p>
+
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">ftpscript</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">upload</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">host</span><span class="o">:</span> <span class="s1">'ftp.server.host'</span>
+      <span class="p">},</span>
+      <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s1">'src/localfile'</span><span class="p">,</span> <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/remotefile'</span> <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nx">expand</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+          <span class="nx">cwd</span><span class="o">:</span> <span class="s1">'dest'</span><span class="p">,</span>
+          <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
+            <span class="s1">'**/*.js'</span><span class="p">,</span>
+            <span class="s1">'!**/exclude.js'</span>
+          <span class="p">],</span>
+          <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/remotefolder/'</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>Username and password are stored as a JSON object in a file named <code>.ftppass</code>, This file should be located in the same folder as your Gruntfile. like <a href="https://github.com/zonak/grunt-ftp-deploy">grunt-ftp-deploy</a>.</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">"ftp.server.host"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"username"</span><span class="p">:</span> <span class="s2">"username1"</span><span class="p">,</span>
+    <span class="nt">"password"</span><span class="p">:</span> <span class="s2">"password1"</span>
+  <span class="p">},</span>
+  <span class="nt">"authKey"</span><span class="p">:{</span>
+    <span class="nt">"username"</span><span class="p">:</span> <span class="s2">"username2"</span><span class="p">,</span>
+    <span class="nt">"password"</span><span class="p">:</span> <span class="s2">"password2"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h4>
+<a name="optionshost" class="anchor" href="#optionshost"><span class="octicon octicon-link"></span></a>options.host</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>'localhost'</code></p>
+
+<p>Ftp Server host address.</p>
+
+<h4>
+<a name="optionsport" class="anchor" href="#optionsport"><span class="octicon octicon-link"></span></a>options.port</h4>
+
+<p>Type: <code>Number</code>
+Default value: <code>21</code></p>
+
+<p>Ftp Server port.</p>
+
+<h4>
+<a name="optionsauthkey" class="anchor" href="#optionsauthkey"><span class="octicon octicon-link"></span></a>options.authKey</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>same as options.host</code></p>
+
+<p>Key in the <code>.ftppass</code>.</p>
+
+<h4>
+<a name="optionspassive" class="anchor" href="#optionspassive"><span class="octicon octicon-link"></span></a>options.passive</h4>
+
+<p>Type: <code>Boolean</code>
+Default value: <code>false</code></p>
+
+<p>Use passive mode.</p>
+
+<h4>
+<a name="optionsdryrun" class="anchor" href="#optionsdryrun"><span class="octicon octicon-link"></span></a>options.dryrun</h4>
+
+<p>Type: <code>Boolean</code>
+Default value: <code>false</code></p>
+
+<p>Dry run, display ftp script, connect to Ftp Server, skip upload, send <code>ls</code> command, and <code>quit</code>.</p>
+
+<h4>
+<a name="optionsftpcommand" class="anchor" href="#optionsftpcommand"><span class="octicon octicon-link"></span></a>options.ftpCommand</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>'ftp'</code></p>
+
+<p>Ftp command path, if it dos not in system PATH.</p>
+
+<h4>
+<a name="optionsencoding" class="anchor" href="#optionsencoding"><span class="octicon octicon-link"></span></a>options.encoding</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>'utf-8'</code></p>
+
+<p>The encoding of send to Server stream.</p>
+
+<h4>
+<a name="optionsftpencoding" class="anchor" href="#optionsftpencoding"><span class="octicon octicon-link"></span></a>options.ftpEncoding</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>'utf-8'</code></p>
+
+<p>The encoding of recive from Server stream.</p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">ftpscript</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">main</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">host</span><span class="o">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
+        <span class="nx">port</span><span class="o">:</span> <span class="mi">2121</span><span class="p">,</span>
+        <span class="nx">passive</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+        <span class="err">#</span> <span class="nx">dryrun</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+        <span class="err">#</span> <span class="nx">ftpCommand</span><span class="o">:</span> <span class="s1">'ftp'</span><span class="p">,</span>
+        <span class="err">#</span> <span class="nx">encoding</span><span class="o">:</span> <span class="s1">'utf-8'</span><span class="p">,</span>
+        <span class="err">#</span> <span class="nx">ftpEncoding</span><span class="o">:</span> <span class="s1">'utf-8'</span>
+      <span class="p">},</span>
+      <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nx">expand</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+          <span class="nx">cwd</span><span class="o">:</span> <span class="s1">'test'</span><span class="p">,</span>
+          <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">'**/*.js'</span><span class="p">,</span> <span class="s1">'!**/exclude.js'</span><span class="p">,</span> <span class="s1">'!**/sub.js'</span> <span class="p">,</span> <span class="s1">'!footer.js'</span><span class="p">],</span>
+          <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/js/'</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nx">expand</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+          <span class="nx">cwd</span><span class="o">:</span> <span class="s1">'test'</span><span class="p">,</span>
+          <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">'nav_*'</span><span class="p">,</span> <span class="s1">'!nav_test.html'</span><span class="p">],</span>
+          <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/app/'</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">'test/footer.js'</span><span class="p">],</span>
+          <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/foo/footer.js'</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>Use dry run command parameters.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
+<pre><code>&gt; grunt ftpscript:main:dry
+open localhost 2121
+user username1 password1
+type binary
+prompt
+passive
+!echo In dry-run mode
+mkdir "js"
+mkdir "js/sub"
+mkdir "app"
+mkdir "foo"
+put "test/one.js" "/js/one.js"
+put "test/sub/one.js" "/js/sub/one.js"
+put "test/sub/three.js" "/js/sub/three.js"
+put "test/sub/two.js" "/js/sub/two.js"
+put "test/three.js" "/js/three.js"
+put "test/two.js" "/js/two.js"
+put "test/nav_one.html" "/app/nav_one.html"
+put "test/nav_two.html" "/app/nav_two.html"
+put "test/footer.js" "/foo/footer.js"
+!echo In dry-run mode
+quit
+
+Connected to localhost.
+220 Vhost server
+331 Password required for testuser
+
+230 Anonymous access granted, restrictions apply
+
+Remote system type is UNIX.
+Using binary mode to transfer files.
+200 Type set to I
+
+Interactive mode off.
+Passive mode on.
+227 Entering Passive Mode (127,0,0,1,255,253).
+
+150 Opening ASCII mode data connection for file list
+
+drwxr-xr-x   3 nobody   nobody       4096 Jul 18 06:58 app
+drwxr-xr-x   2 nobody   nobody       4096 Jul 17 09:54 foo
+drwxr-xr-x   3 nobody   nobody       4096 Jul 17 09:54 js
+226 Transfer complete
+
+&gt;&gt; 221 Goodbye.
+
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/netwjx/grunt-ftpscript/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/netwjx/grunt-ftpscript/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/netwjx/grunt-ftpscript"></a> is maintained by <a href="https://github.com/netwjx">netwjx</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+  
   </body>
 </html>
