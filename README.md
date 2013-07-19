@@ -40,7 +40,7 @@ grunt.initConfig({
       files: [
         { src: 'src/localfile', dest: '/remotefile' },
         {
-          expand: on,
+          expand: true,
           cwd: 'dest',
           src: [
             '**/*.js',
@@ -128,23 +128,23 @@ grunt.initConfig({
   ftpscript: {
     main: {
       options: {
-        host: 'localhost',
-        port: 2121,
-        passive: on,
-        # dryrun: on,
-        # ftpCommand: 'ftp',
-        # encoding: 'utf-8',
-        # ftpEncoding: 'utf-8'
+        host: 'localhost'
+        , port: 2121
+        , passive: true
+        // , dryrun: true
+        // , ftpCommand: 'ftp',
+        // , encoding: 'utf-8',
+        // , ftpEncoding: 'utf-8'
       },
       files: [
         {
-          expand: on,
+          expand: true,
           cwd: 'test',
           src: ['**/*.js', '!**/exclude.js', '!**/sub.js' , '!footer.js'],
           dest: '/js/'
         },
         {
-          expand: on,
+          expand: true,
           cwd: 'test',
           src: ['nav_*', '!nav_test.html'],
           dest: '/app/'
