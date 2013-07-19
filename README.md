@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/netwjx/grunt-ftpscript.png)](https://travis-ci.org/netwjx/grunt-ftpscript)
+
 # grunt-ftpscript
 
 > Upload files to FTP Server, Active or Passive mode, bash ftp command.
