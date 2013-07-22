@@ -1,5 +1,5 @@
 module.exports = exports = (grunt)->
-  grunt.registerMultiTask 'ftpscript', 'Upload files to FTP Server, Active or Passive mode, bash ftp command.', (args...)->
+  grunt.registerMultiTask 'ftpscript', grunt.file.readJSON('package.json').description, (args...)->
     opts = this.options
       host: 'localhost'
       port: 21
