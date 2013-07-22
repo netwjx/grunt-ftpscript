@@ -1,4 +1,4 @@
-# grunt-ftpscript [![Build Status](https://travis-ci.org/netwjx/grunt-ftpscript.png)](https://travis-ci.org/netwjx/grunt-ftpscript)
+# grunt-ftpscript [![Build Status](https://travis-ci.org/netwjx/grunt-ftpscript.png)](https://travis-ci.org/netwjx/grunt-ftpscript) [![Dependency Status](https://gemnasium.com/netwjx/grunt-ftpscript.png)](https://gemnasium.com/netwjx/grunt-ftpscript) [![NPM version](https://badge.fury.io/js/grunt-ftpscript.png)](http://badge.fury.io/js/grunt-ftpscript)
 
 > Upload files to FTP Server, Active or Passive mode, base ftp command.
 
