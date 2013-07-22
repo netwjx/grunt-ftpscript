@@ -130,8 +130,8 @@ grunt.initConfig({
         , port: 2121
         , passive: true
         // , dryrun: true
-        // , ftpCommand: 'ftp',
-        // , encoding: 'utf-8',
+        // , ftpCommand: 'ftp'
+        // , encoding: 'utf-8'
         // , ftpEncoding: 'utf-8'
       },
       files: [
