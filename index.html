@@ -28,13 +28,12 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <p><a href="https://travis-ci.org/netwjx/grunt-ftpscript"><img src="https://travis-ci.org/netwjx/grunt-ftpscript.png" alt="Build Status"></a></p>
-
-<h1>
-<a name="grunt-ftpscript" class="anchor" href="#grunt-ftpscript"><span class="octicon octicon-link"></span></a>grunt-ftpscript</h1>
+          <h1>
+<a name="grunt-ftpscript-" class="anchor" href="#grunt-ftpscript-"><span class="octicon octicon-link"></span></a>grunt-ftpscript <a href="https://travis-ci.org/netwjx/grunt-ftpscript"><img src="https://travis-ci.org/netwjx/grunt-ftpscript.png" alt="Build Status"></a>
+</h1>
 
 <blockquote>
-<p>Upload files to FTP Server, Active or Passive mode, bash ftp command.</p>
+<p>Upload files to FTP Server, Active or Passive mode, base ftp command.</p>
 </blockquote>
 
 <h2>
@@ -74,7 +73,7 @@
       <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span> <span class="nx">src</span><span class="o">:</span> <span class="s1">'src/localfile'</span><span class="p">,</span> <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/remotefile'</span> <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nx">expand</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+          <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
           <span class="nx">cwd</span><span class="o">:</span> <span class="s1">'dest'</span><span class="p">,</span>
           <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
             <span class="s1">'**/*.js'</span><span class="p">,</span>
@@ -176,23 +175,23 @@ Default value: <code>'utf-8'</code></p>
   <span class="nx">ftpscript</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">main</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">host</span><span class="o">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
-        <span class="nx">port</span><span class="o">:</span> <span class="mi">2121</span><span class="p">,</span>
-        <span class="nx">passive</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
-        <span class="err">#</span> <span class="nx">dryrun</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
-        <span class="err">#</span> <span class="nx">ftpCommand</span><span class="o">:</span> <span class="s1">'ftp'</span><span class="p">,</span>
-        <span class="err">#</span> <span class="nx">encoding</span><span class="o">:</span> <span class="s1">'utf-8'</span><span class="p">,</span>
-        <span class="err">#</span> <span class="nx">ftpEncoding</span><span class="o">:</span> <span class="s1">'utf-8'</span>
+        <span class="nx">host</span><span class="o">:</span> <span class="s1">'localhost'</span>
+        <span class="p">,</span> <span class="nx">port</span><span class="o">:</span> <span class="mi">2121</span>
+        <span class="p">,</span> <span class="nx">passive</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="c1">// , dryrun: true</span>
+        <span class="c1">// , ftpCommand: 'ftp',</span>
+        <span class="c1">// , encoding: 'utf-8',</span>
+        <span class="c1">// , ftpEncoding: 'utf-8'</span>
       <span class="p">},</span>
       <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="nx">expand</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+          <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
           <span class="nx">cwd</span><span class="o">:</span> <span class="s1">'test'</span><span class="p">,</span>
           <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">'**/*.js'</span><span class="p">,</span> <span class="s1">'!**/exclude.js'</span><span class="p">,</span> <span class="s1">'!**/sub.js'</span> <span class="p">,</span> <span class="s1">'!footer.js'</span><span class="p">],</span>
           <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/js/'</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="nx">expand</span><span class="o">:</span> <span class="nx">on</span><span class="p">,</span>
+          <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
           <span class="nx">cwd</span><span class="o">:</span> <span class="s1">'test'</span><span class="p">,</span>
           <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">'nav_*'</span><span class="p">,</span> <span class="s1">'!nav_test.html'</span><span class="p">],</span>
           <span class="nx">dest</span><span class="o">:</span> <span class="s1">'/app/'</span>
