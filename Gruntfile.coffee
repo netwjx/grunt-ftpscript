@@ -36,15 +36,10 @@ module.exports = (grunt)->
         files: [
           {
             expand: on
-            src: 'tasks/**/*.coffee'
-            ext: '.js'
-          }
-        ]
-      test:
-        files: [
-          {
-            expand: on
-            src: 'test/**/*.coffee'
+            src: [
+              'tasks/**/*.coffee'
+              'test/**/*.coffee'
+            ]
             ext: '.js'
           }
         ]
@@ -73,13 +68,8 @@ module.exports = (grunt)->
         #   nospawn: on
         files: "<%= coffee.main.files[0].src %>"
         tasks: [
-          'clean:main'
-          'coffee:main'
-        ]
-      test:
-        files: "<%= coffee.test.files[0].src %>"
-        tasks: [
-          'coffee:test'
+          'clean'
+          'coffee'
         ]
 
     nodeunit:
