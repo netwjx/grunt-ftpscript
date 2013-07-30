@@ -1,6 +1,6 @@
 module.exports = exports = (grunt)->
   grunt.registerMultiTask 'ftpscript', grunt.file.readJSON('package.json').description, (args...)->
-    opts = this.options
+    opts = @options
       host: 'localhost'
       port: 21
       passive: no
@@ -26,7 +26,7 @@ module.exports = exports = (grunt)->
     dirs = {}
     files = []
 
-    generateUpload dirs, files, f for f in this.files
+    generateUpload dirs, files, f for f in @files
       
 
     dirs = for i of dirs

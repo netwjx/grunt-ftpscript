@@ -66,7 +66,7 @@ module.exports = (grunt)->
       main:
         # options:
         #   nospawn: on
-        files: "<%= coffee.main.files[0].src %>"
+        files: "<%= coffee.main.files.0.src %>"
         tasks: [
           'clean'
           'coffee'
