@@ -1,3 +1,5 @@
+grunt = require 'grunt'
+
 module.exports = exports = (grunt)->
   grunt.registerMultiTask 'ftpscript', grunt.file.readJSON('package.json').description, (args...)->
     opts = @options
@@ -71,8 +73,9 @@ module.exports = exports = (grunt)->
     p.stdin.write cmds
     return
 
-generateUpload = exports.generateUpload = (dirs, files, f)->
-  files.push "put \"#{ src }\" \"#{ f.dest }\"" for src in f.src
-  paths = f.dest.split('/')[1..-2]
-  for p, i in paths
+generateUpload = exports.generateUpload = (dirs, files, f, delectFile = on)->
+  for src in f.src when !delectFile or grunt.file.isFile src
+    files.push "put \"#{ src }\" \"#{ f.dest }\""
+  paths = f.dest.replace(/^\/?/, '/').split('/')[0..-2]
+  for p, i in paths when i > 0
     dirs[paths[0..i].join('/')] = on
