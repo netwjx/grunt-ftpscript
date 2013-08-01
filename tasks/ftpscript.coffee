@@ -32,9 +32,13 @@ module.exports = exports = (grunt)->
     dirs = for i of dirs
       "mkdir \"#{ i }\""
 
-    for dry in ['dry', 'dryrun', 'dry-run']
-      if dry in args
-        opts.dryrun = on
+    for arg in args
+      switch arg
+        when 'dry', 'dryrun', 'dry-run'
+          opts.dryrun = on
+        when 'act', 'actual'
+          opts.dryrun = no
+
     if opts.dryrun
       grunt.log.writeln cmds.concat('!echo In dry-run mode', dirs, files, '!echo In dry-run mode', 'quit' , '').join('\n')
       cmds = cmds.concat 'ls'
