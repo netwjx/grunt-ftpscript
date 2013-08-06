@@ -42,18 +42,25 @@ module.exports = exports = (grunt)->
           opts.dryrun = no
 
     if opts.dryrun
-      grunt.log.writeln cmds.concat('!echo In dry-run mode', dirs, files, '!echo In dry-run mode', 'quit' , '').join('\n')
       cmds = cmds.concat 'ls'
     else
       cmds = cmds.concat dirs, files
     cmds = cmds.concat('quit', '').join '\n'
 
+    if opts.dryrun
+      grunt.log.subhead 'Dry-run mode, start display ftp script.'
+      grunt.log.writeln cmds
+      grunt.log.subhead 'End display ftp script.'
+    else
+      grunt.verbose.subhead 'Start display ftp script.'
+      grunt.verbose.writeln cmds
+      grunt.verbose.subhead 'End display ftp script.'
+
     p = require('child_process').spawn opts.ftpCommand, ['-nv']
     done = @async()
     p.on 'exit', (code, signal)->
       if code
-        grunt.fatal signal, code
-        grunt.fatal 'Upload failed!'
+        grunt.fatal 'Upload failed' + signal, code
         done no
       else
         done()
@@ -63,9 +70,22 @@ module.exports = exports = (grunt)->
 
     p.stdout.on 'data', (data)->
       for line in data.split '\n'
-        if /^5\d{2}/.test(line) or /^Not connected/.test(line)
-          grunt.warn line
-        else if /^221 /.test line
+        if line is ''
+          continue
+        else if line in [
+          '550 Create directory operation failed.'
+          '331 Please specify the password.'
+          'Using binary mode to transfer files.'
+          'Interactive mode off.'
+        ] or
+        /^200 /.test(line) or
+        /^1\d{2} /.test(line) or
+        /^\d+ bytes sent in [\d\.]+ secs/.test(line) or
+        /^Remote system type is/.test(line)
+          grunt.verbose.writeln line
+        else if /^5\d{2} /.test(line) or /^Not connected/.test(line)
+          grunt.log.error line
+        else if /^2\d{2} /.test line
           grunt.log.ok line
         else
           grunt.log.writeln line
