@@ -42,19 +42,18 @@ module.exports = exports = (grunt)->
           opts.dryrun = no
 
     if opts.dryrun
+      grunt.log.subhead 'Dry-run mode, start display ftp script.'
+      grunt.log.writeln cmds.concat(dirs, files, 'quit').join '\n'
+      grunt.log.subhead 'End display ftp script.'
+
       cmds = cmds.concat 'ls'
     else
+      grunt.verbose.subhead 'Start display ftp script.'
+      grunt.verbose.writeln cmds.concat(dirs, files, 'quit').join '\n'
+      grunt.verbose.subhead 'End display ftp script.'
+
       cmds = cmds.concat dirs, files
     cmds = cmds.concat('quit', '').join '\n'
-
-    if opts.dryrun
-      grunt.log.subhead 'Dry-run mode, start display ftp script.'
-      grunt.log.writeln cmds
-      grunt.log.subhead 'End display ftp script.'
-    else
-      grunt.verbose.subhead 'Start display ftp script.'
-      grunt.verbose.writeln cmds
-      grunt.verbose.subhead 'End display ftp script.'
 
     p = require('child_process').spawn opts.ftpCommand, ['-nv']
     done = @async()
