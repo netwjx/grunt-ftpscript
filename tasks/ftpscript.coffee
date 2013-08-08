@@ -6,10 +6,12 @@ module.exports = exports = (grunt)->
       host: 'localhost'
       port: 21
       passive: no
+      type: 'ascii'
       dryrun: no
       ftpCommand: 'ftp'
       encoding: 'utf-8'
       ftpEncoding: 'utf-8'
+      mkdirs: no
 
     auth = grunt.file.readJSON('.ftppass')?[opts.authKey ? opts.host]
 
@@ -20,7 +22,7 @@ module.exports = exports = (grunt)->
     cmds = [
       "open #{ opts.host } #{ opts.port }"
       "user #{ auth.username } #{ auth.password }"
-      'type binary'
+      "type #{opts.type}"
       'prompt'
     ]
     cmds.push 'passive' if opts.passive
@@ -30,9 +32,11 @@ module.exports = exports = (grunt)->
 
     generateUpload dirs, files, f for f in @files
       
-
-    dirs = for i of dirs
-      "mkdir \"#{ i }\""
+    if opts.mkdirs
+      dirs = for i of dirs
+        "mkdir \"#{ i }\""
+    else
+      dirs = []
 
     for arg in args
       switch arg
