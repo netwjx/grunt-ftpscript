@@ -6,6 +6,8 @@ module.exports = (grunt)->
           host: 'localhost'
           port: 2121
           passive: on
+          # type: 'binary'
+          # mkdirs: no
           # dryrun: on
           # ftpCommand: 'ftp'
           # encoding: 'utf-8'
@@ -37,7 +39,7 @@ module.exports = (grunt)->
           {
             expand: on
             src: [
-              'tasks/**/*.coffee'
+              # 'tasks/**/*.coffee'
               'test/**/*.coffee'
             ]
             ext: '.js'
