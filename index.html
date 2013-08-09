@@ -29,7 +29,7 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a name="grunt-ftpscript-" class="anchor" href="#grunt-ftpscript-"><span class="octicon octicon-link"></span></a>grunt-ftpscript <a href="https://travis-ci.org/netwjx/grunt-ftpscript"><img src="https://travis-ci.org/netwjx/grunt-ftpscript.png" alt="Build Status"></a>
+<a name="grunt-ftpscript---" class="anchor" href="#grunt-ftpscript---"><span class="octicon octicon-link"></span></a>grunt-ftpscript <a href="https://travis-ci.org/netwjx/grunt-ftpscript"><img src="https://travis-ci.org/netwjx/grunt-ftpscript.png" alt="Build Status"></a> <a href="https://gemnasium.com/netwjx/grunt-ftpscript"><img src="https://gemnasium.com/netwjx/grunt-ftpscript.png" alt="Dependency Status"></a> <a href="http://badge.fury.io/js/grunt-ftpscript"><img src="https://badge.fury.io/js/grunt-ftpscript.png" alt="NPM version"></a>
 </h1>
 
 <blockquote>
@@ -137,6 +137,14 @@ Default value: <code>false</code></p>
 <p>Use passive mode.</p>
 
 <h4>
+<a name="optionstype" class="anchor" href="#optionstype"><span class="octicon octicon-link"></span></a>options.type</h4>
+
+<p>Type: <code>String</code>
+Default value: <code>ascii</code></p>
+
+<p><code>ascii</code> or <code>binary</code></p>
+
+<h4>
 <a name="optionsdryrun" class="anchor" href="#optionsdryrun"><span class="octicon octicon-link"></span></a>options.dryrun</h4>
 
 <p>Type: <code>Boolean</code>
@@ -169,7 +177,17 @@ Default value: <code>'utf-8'</code></p>
 <p>The encoding of recive from Server stream.</p>
 
 <h3>
+<a name="optionsmkdirs" class="anchor" href="#optionsmkdirs"><span class="octicon octicon-link"></span></a>options.mkdirs</h3>
+
+<p>Type: <code>Boolean</code>
+Default value: <code>true</code></p>
+
+<p>Execute <code>mkdir /remote/folder</code> command.</p>
+
+<h3>
 <a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h3>
+
+<p>In <code>Gruntfile.js</code></p>
 
 <div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
   <span class="nx">ftpscript</span><span class="o">:</span> <span class="p">{</span>
@@ -178,9 +196,11 @@ Default value: <code>'utf-8'</code></p>
         <span class="nx">host</span><span class="o">:</span> <span class="s1">'localhost'</span>
         <span class="p">,</span> <span class="nx">port</span><span class="o">:</span> <span class="mi">2121</span>
         <span class="p">,</span> <span class="nx">passive</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="c1">// , type: 'ascii'</span>
+        <span class="c1">// , mkdirs: false</span>
         <span class="c1">// , dryrun: true</span>
-        <span class="c1">// , ftpCommand: 'ftp',</span>
-        <span class="c1">// , encoding: 'utf-8',</span>
+        <span class="c1">// , ftpCommand: 'ftp'</span>
+        <span class="c1">// , encoding: 'utf-8'</span>
         <span class="c1">// , ftpEncoding: 'utf-8'</span>
       <span class="p">},</span>
       <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
@@ -209,51 +229,40 @@ Default value: <code>'utf-8'</code></p>
 <p>Use dry run command parameters.</p>
 
 <pre><code>&gt; grunt ftpscript:main:dry
+Running "ftpscript:main:dry" (ftpscript) task
+
+Dry-run mode, start display ftp script.
 open localhost 2121
-user username1 password1
-type binary
+user testuser testpass
+type ascii
 prompt
 passive
-!echo In dry-run mode
-mkdir "js"
-mkdir "js/sub"
-mkdir "app"
-mkdir "foo"
+mkdir "/js"
+mkdir "/js/sub"
+mkdir "/app"
+mkdir "/foo"
 put "test/one.js" "/js/one.js"
 put "test/sub/one.js" "/js/sub/one.js"
 put "test/sub/three.js" "/js/sub/three.js"
 put "test/sub/two.js" "/js/sub/two.js"
 put "test/three.js" "/js/three.js"
 put "test/two.js" "/js/two.js"
+put "test/unit_test.js" "/js/unit_test.js"
 put "test/nav_one.html" "/app/nav_one.html"
 put "test/nav_two.html" "/app/nav_two.html"
 put "test/footer.js" "/foo/footer.js"
-!echo In dry-run mode
 quit
 
+End display ftp script.
 Connected to localhost.
-220 Vhost server
-331 Password required for testuser
-
-230 Anonymous access granted, restrictions apply
-
-Remote system type is UNIX.
-Using binary mode to transfer files.
-200 Type set to I
-
-Interactive mode off.
-Passive mode on.
-227 Entering Passive Mode (127,0,0,1,255,253).
-
-150 Opening ASCII mode data connection for file list
-
+&gt;&gt; 220 Vhost server
 drwxr-xr-x   3 nobody   nobody       4096 Jul 18 06:58 app
 drwxr-xr-x   2 nobody   nobody       4096 Jul 17 09:54 foo
 drwxr-xr-x   3 nobody   nobody       4096 Jul 17 09:54 js
 226 Transfer complete
-
 &gt;&gt; 221 Goodbye.
 
+Done, without errors.
 </code></pre>
         </section>
 
