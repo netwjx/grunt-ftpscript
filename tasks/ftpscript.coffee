@@ -11,7 +11,7 @@ module.exports = exports = (grunt)->
       ftpCommand: 'ftp'
       encoding: 'utf-8'
       ftpEncoding: 'utf-8'
-      mkdirs: no
+      mkdirs: on
 
     auth = grunt.file.readJSON('.ftppass')?[opts.authKey ? opts.host]
 
