@@ -77,14 +77,14 @@ module.exports = exports = (grunt)->
           continue
         else if line in [
           '550 Create directory operation failed.'
-          '331 Please specify the password.'
           'Using binary mode to transfer files.'
           'Interactive mode off.'
+          'Passive mode on.'
         ] or
-        /^200 /.test(line) or
-        /^1\d{2} /.test(line) or
+        /^Remote system type is/.test(line) or
         /^\d+ bytes sent in [\d\.]+ secs/.test(line) or
-        /^Remote system type is/.test(line)
+        /^(200|227|230|331) /.test(line) or
+        /^1\d{2} /.test(line)
           grunt.verbose.writeln line
         else if /^5\d{2} /.test(line) or /^Not connected/.test(line)
           grunt.log.error line
