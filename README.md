@@ -94,6 +94,12 @@ Default value: `false`
 
 Use passive mode.
 
+#### options.type
+Type: `String`
+Default value: `ascii`
+
+`ascii` or `binary`
+
 #### options.dryrun
 Type: `Boolean`
 Default value: `false`
@@ -118,8 +124,15 @@ Default value: `'utf-8'`
 
 The encoding of recive from Server stream.
 
+### options.mkdirs
+Type: `Boolean`
+Default value: `true`
+
+Execute `mkdir /remote/folder` command.
 
 ### Usage Examples
+
+In `Gruntfile.js`
 
 ```js
 grunt.initConfig({
@@ -129,6 +142,8 @@ grunt.initConfig({
         host: 'localhost'
         , port: 2121
         , passive: true
+        // , type: 'ascii'
+        // , mkdirs: false
         // , dryrun: true
         // , ftpCommand: 'ftp'
         // , encoding: 'utf-8'
@@ -161,50 +176,39 @@ Use dry run command parameters.
 
 ```
 > grunt ftpscript:main:dry
+Running "ftpscript:main:dry" (ftpscript) task
+
+Dry-run mode, start display ftp script.
 open localhost 2121
-user username1 password1
-type binary
+user testuser testpass
+type ascii
 prompt
 passive
-!echo In dry-run mode
-mkdir "js"
-mkdir "js/sub"
-mkdir "app"
-mkdir "foo"
+mkdir "/js"
+mkdir "/js/sub"
+mkdir "/app"
+mkdir "/foo"
 put "test/one.js" "/js/one.js"
 put "test/sub/one.js" "/js/sub/one.js"
 put "test/sub/three.js" "/js/sub/three.js"
 put "test/sub/two.js" "/js/sub/two.js"
 put "test/three.js" "/js/three.js"
 put "test/two.js" "/js/two.js"
+put "test/unit_test.js" "/js/unit_test.js"
 put "test/nav_one.html" "/app/nav_one.html"
 put "test/nav_two.html" "/app/nav_two.html"
 put "test/footer.js" "/foo/footer.js"
-!echo In dry-run mode
 quit
 
+End display ftp script.
 Connected to localhost.
-220 Vhost server
-331 Password required for testuser
-
-230 Anonymous access granted, restrictions apply
-
-Remote system type is UNIX.
-Using binary mode to transfer files.
-200 Type set to I
-
-Interactive mode off.
-Passive mode on.
-227 Entering Passive Mode (127,0,0,1,255,253).
-
-150 Opening ASCII mode data connection for file list
-
+>> 220 Vhost server
 drwxr-xr-x   3 nobody   nobody       4096 Jul 18 06:58 app
 drwxr-xr-x   2 nobody   nobody       4096 Jul 17 09:54 foo
 drwxr-xr-x   3 nobody   nobody       4096 Jul 17 09:54 js
 226 Transfer complete
-
 >> 221 Goodbye.
 
+Done, without errors.
 ```
 
