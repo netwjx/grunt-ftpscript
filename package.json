@@ -1,7 +1,7 @@
 {
   "name": "grunt-ftpscript",
   "description": "Upload files to FTP Server, Active or Passive mode, base ftp command.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/netwjx/grunt-ftpscript",
   "author": {
     "name": "netwjx",
@@ -37,6 +37,9 @@
     "matchdep": "~0.1.2",
     "grunt-coffeelint": "0.0.7",
     "grunt-contrib-watch": "~0.4.4"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
   },
   "keywords": [
     "gruntplugin",
