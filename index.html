@@ -48,12 +48,12 @@
 
 <p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
 
-<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-ftpscript'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-ftpscript'</span><span class="p">);</span>
 </pre></div>
 
 <p>Use <a href="https://github.com/tkellen/node-matchdep">matchdep</a> load npm tasks is good idea.</p>
 
-<div class="highlight"><pre><span class="nx">require</span><span class="p">(</span><span class="s1">'matchdep'</span><span class="p">).</span><span class="nx">filterDev</span><span class="p">(</span><span class="s1">'grunt-*'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="nx">require</span><span class="p">(</span><span class="s1">'matchdep'</span><span class="p">).</span><span class="nx">filterDev</span><span class="p">(</span><span class="s1">'grunt-*'</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">);</span>
 </pre></div>
 
 <h2>
@@ -64,7 +64,7 @@
 
 <p>In your project's Gruntfile, add a section named <code>ftpscript</code> to the data object passed into <code>grunt.initConfig()</code>.</p>
 
-<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
   <span class="nx">ftpscript</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">upload</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
@@ -89,7 +89,7 @@
 
 <p>Username and password are stored as a JSON object in a file named <code>.ftppass</code>, This file should be located in the same folder as your Gruntfile. like <a href="https://github.com/zonak/grunt-ftp-deploy">grunt-ftp-deploy</a>.</p>
 
-<div class="highlight"><pre><span class="p">{</span>
+<div class="highlight highlight-json"><pre><span class="p">{</span>
   <span class="nt">"ftp.server.host"</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">"username"</span><span class="p">:</span> <span class="s2">"username1"</span><span class="p">,</span>
     <span class="nt">"password"</span><span class="p">:</span> <span class="s2">"password1"</span>
@@ -140,9 +140,9 @@ Default value: <code>false</code></p>
 <a name="optionstype" class="anchor" href="#optionstype"><span class="octicon octicon-link"></span></a>options.type</h4>
 
 <p>Type: <code>String</code>
-Default value: <code>ascii</code></p>
+Default value: <code>undefined</code></p>
 
-<p><code>ascii</code> or <code>binary</code></p>
+<p><code>ascii</code> or <code>binary</code> or auto detect with mime type.</p>
 
 <h4>
 <a name="optionsdryrun" class="anchor" href="#optionsdryrun"><span class="octicon octicon-link"></span></a>options.dryrun</h4>
@@ -189,7 +189,7 @@ Default value: <code>true</code></p>
 
 <p>In <code>Gruntfile.js</code></p>
 
-<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
   <span class="nx">ftpscript</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">main</span><span class="o">:</span> <span class="p">{</span>
       <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
