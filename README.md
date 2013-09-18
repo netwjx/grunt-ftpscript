@@ -96,9 +96,9 @@ Use passive mode.
 
 #### options.type
 Type: `String`
-Default value: `ascii`
+Default value: `undefined`
 
-`ascii` or `binary`
+`ascii` or `binary` or auto detect with mime type.
 
 #### options.dryrun
 Type: `Boolean`

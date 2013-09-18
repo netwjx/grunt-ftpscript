@@ -1,4 +1,5 @@
 grunt = require 'grunt'
+mime = require 'mime'
 
 module.exports = exports = (grunt)->
   grunt.registerMultiTask 'ftpscript', grunt.file.readJSON('package.json').description, (args...)->
@@ -6,7 +7,6 @@ module.exports = exports = (grunt)->
       host: 'localhost'
       port: 21
       passive: no
-      type: 'ascii'
       dryrun: no
       ftpCommand: 'ftp'
       encoding: 'utf-8'
@@ -15,14 +15,14 @@ module.exports = exports = (grunt)->
 
     auth = grunt.file.readJSON('.ftppass')?[opts.authKey ? opts.host]
 
-    if !auth or !auth.username
+    if not auth or not auth.username
       grunt.fatal "Not found \"#{ opts.authKey }\" or \"#{ opts.host }\" in file .ftppass"
       return no
 
     cmds = [
       "open #{ opts.host } #{ opts.port }"
       "user #{ auth.username } #{ auth.password }"
-      "type #{opts.type}"
+      if opts.type in ['ascii', 'binary'] then "type #{ opts.type }" else ''
       'prompt'
     ]
     cmds.push 'passive' if opts.passive
@@ -37,6 +37,16 @@ module.exports = exports = (grunt)->
         "mkdir \"#{ i }\""
     else
       dirs = []
+
+    if not (opts.type in ['ascii', 'binary'])
+      last = ''
+      files = files.map (f)->
+        fp = f.split('"')[1]
+        t = if isASCII fp then 'ascii' else 'binary'
+        f = if t is last then f else "type #{ t }\n#{ f }"
+        last = t
+        f
+          
 
     for arg in args
       switch arg
@@ -96,9 +106,16 @@ module.exports = exports = (grunt)->
     p.stdin.write cmds
     return
 
-generateUpload = exports.generateUpload = (dirs, files, f, delectFile = on)->
+exports.generateUpload = generateUpload = (dirs, files, f, delectFile = on)->
   for src in f.src when !delectFile or grunt.file.isFile src
     files.push "put \"#{ src }\" \"#{ f.dest }\""
   paths = f.dest.replace(/^\/?/, '/').split('/')[0..-2]
   for p, i in paths when i > 0
     dirs[paths[0..i].join('/')] = on
+
+exports.isASCII = isASCII = (f)->
+  m = mime.lookup(f)
+  m[0..3] is 'text' or m in [
+    'application/javascript'
+
+  ]
