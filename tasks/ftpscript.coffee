@@ -13,10 +13,11 @@ module.exports = exports = (grunt)->
       ftpEncoding: 'utf-8'
       mkdirs: on
 
-    auth = grunt.file.readJSON('.ftppass')?[opts.authKey ? opts.host]
+    auth = opts.auth or grunt.file.readJSON('.ftppass')?[opts.authKey ? opts.host]
 
     if not auth or not auth.username
-      grunt.fatal "Not found \"#{ opts.authKey }\" or \"#{ opts.host }\" in file .ftppass"
+      grunt.fatal "Not found \"#{ opts.authKey }\" or \"#{ opts.host }\" in file .ftppass,
+                   and no explicit auth configuration was found in task options"
       return no
 
     cmds = [
@@ -31,7 +32,7 @@ module.exports = exports = (grunt)->
     files = []
 
     generateUpload dirs, files, f for f in @files
-      
+
     if opts.mkdirs
       dirs = for i of dirs
         "mkdir \"#{ i }\""
@@ -46,7 +47,7 @@ module.exports = exports = (grunt)->
         f = if t is last then f else "type #{ t }\n#{ f }"
         last = t
         f
-          
+
 
     for arg in args
       switch arg

@@ -67,6 +67,17 @@ Username and password are stored as a JSON object in a file named `.ftppass`, Th
 }
 ```
 
+It is also possible to explicitly set username and password in task options:
+
+```js
+{
+  options: {
+    // WARNING: Never commit this kind of explicit configuration into source control !!
+    username: 'username1',
+    password: 'password1'
+  }
+}
+```
 
 ### Options
 
@@ -87,6 +98,12 @@ Type: `String`
 Default value: `same as options.host`
 
 Key in the `.ftppass`.
+
+### options.auth
+Type: `Object`
+Default value: `undefined`
+
+Explicit auth configuration, an object with username and password keys.
 
 #### options.passive
 Type: `Boolean`
