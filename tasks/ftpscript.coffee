@@ -11,7 +11,8 @@ module.exports = exports = (grunt)->
       ftpCommand: 'ftp'
       encoding: 'utf-8'
       ftpEncoding: 'utf-8'
-      mkdirs: on
+      mkdirs: on,
+      timeout: 60
 
     auth = opts.auth or grunt.file.readJSON('.ftppass')?[opts.authKey ? opts.host]
 
@@ -70,7 +71,7 @@ module.exports = exports = (grunt)->
       cmds = cmds.concat dirs, files
     cmds = cmds.concat('quit', '').join '\n'
 
-    p = require('child_process').spawn opts.ftpCommand, ['-nv']
+    p = require('child_process').spawn opts.ftpCommand, ['-nv', '-q ' + opts.timeout]
     done = @async()
     p.on 'exit', (code, signal)->
       if code
